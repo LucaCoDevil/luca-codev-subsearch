@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 
- function SearchBar() {
+ function SearchBar(props) {
+     
+    const [subredditSearch, setsubredditSearch] = useState("")
+
+    const handleInputChange = (e) =>{
+        props.setsubreddit(subredditSearch.replace(/\s/g, ''))
+    }
+
     return (
-        <form style={{}}>
+        <form onSubmit={handleInputChange}>
             <label htmlFor="subreddit">/r/</label>
-            <input type="text" name="subreddit"/>
+            <input type="text" name="subreddit"
+            value={subredditSearch} 
+            onChange={e=>setsubredditSearch(e.target.value) }
+            required/>
+            <button type="submit" >go</button>
         </form>
     )
 }

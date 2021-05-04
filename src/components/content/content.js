@@ -2,11 +2,11 @@ import React from 'react';
 import Styled from 'styled-components';
 import Post from '../subredditPost/subredditPost.js';
 
-function Content() {
+function Content(props) {
 
     const ContentContainer = Styled.div`
     width: 80%;
-    height: 500px;
+    height: auto;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -20,10 +20,12 @@ function Content() {
 
     return (
         <ContentContainer>
-            <h3>/r/Subredditpost</h3>
+            <h3>/r/{props.subredditName}</h3>
             <Hr/>
-            <Post/>
-            <Hr/>
+            {(props.data != null) ? props.data.map((post, index)=>
+                <Post post={post} key={index}/>
+            ): alert("Null")}
+        <Hr/>
         </ContentContainer>
     )
 }

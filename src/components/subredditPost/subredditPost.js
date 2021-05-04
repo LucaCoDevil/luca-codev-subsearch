@@ -1,10 +1,16 @@
 import React from 'react'
+import Styled from 'styled-components';
 
 
- function SubredditPost() {
+
+ function SubredditPost(props) {
+
+    const Heading3 = Styled.h3`
+    text-align: center;
+    `
     return (
         <div>
-            <p>this is going to be the subreddit post</p>
+            <Heading3>{props.post.data.title}</Heading3>
             
         </div>
     )
