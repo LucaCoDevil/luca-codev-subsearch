@@ -1,19 +1,24 @@
-import React from 'react'
-import Styled from 'styled-components';
+import React from "react";
+import Styled from "styled-components";
 
+//styled components
 
+const SubredditContainer = Styled.div`
+padding:0 20px;
+`;
 
- function SubredditPost(props) {
-
-    const Heading3 = Styled.h3`
+const Heading3 = Styled.h4`
     text-align: center;
-    `
-    return (
-        <div>
-            <Heading3>{props.post.data.title}</Heading3>
-            
-        </div>
-    )
+    color: rgb(60,60,60);
+    font-weight: 400;
+    `;
+
+function SubredditPost(props) {
+  return (
+    <SubredditContainer>
+      <Heading3>{props.post.data.title}</Heading3>
+    </SubredditContainer>
+  );
 }
 
 export default SubredditPost;
