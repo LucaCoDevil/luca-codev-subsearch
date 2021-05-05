@@ -15,23 +15,23 @@ function App() {
 
   useEffect(() => {
     console.log(subreddit);
-    // fetch("https://www.reddit.com/r/" + subreddit + ".json").then((res) => {
-    //   switch (res.status) {
-    //     case 404:
-    //       alert("ERROR: cannot get");
-    //       window.location.reload();
-    //       break;
+    fetch("https://www.reddit.com/r/" + subreddit + ".json").then((res) => {
+      switch (res.status) {
+        case 404:
+          alert("ERROR: cannot get");
+          window.location.reload();
+          break;
 
-    //     default:
-    //       break;
-    //   }
+        default:
+          break;
+      }
 
-    //   res.json().then((data) => {
-    //     if (data != null) {
-    //       setPosts(data.data.children);
-    //     }
-    //   });
-    // });
+      res.json().then((data) => {
+        if (data != null) {
+          setPosts(data.data.children);
+        }
+      });
+    });
   }, [subreddit]);
 
   const handleSubreddit = (value) => {
