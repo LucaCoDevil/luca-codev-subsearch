@@ -14,7 +14,6 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    console.log(subreddit);
     fetch("https://www.reddit.com/r/" + subreddit + ".json").then((res) => {
       switch (res.status) {
         case 404:
