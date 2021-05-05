@@ -1,37 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Styled from "styled-components";
-
-//styled components
-
-const Form = Styled.form`
-display:flex;
-margin: 100px auto 60px auto;
-width:400px;
-height:40px;
-background-color:white;
-border-radius:50px;
-`;
-
-const Label = Styled.label`
-width:10%;
-height:100%;
-`;
-
-const Input = Styled.input`
-width:80%;
-padding:0 20px;
-border:0;
-height:100%;
-border-radius: inherit;
-`;
-
-const GOButton = Styled.button`
-width:20%;
-height:100%;
-border-radius:0 50px 50px 0;
-border:none;
-
-`;
+import React, { useState } from "react";
+import { Form, Input, GoButton } from "../styledComponents";
 
 function SearchBar(props) {
   const [subredditSearch, setsubredditSearch] = useState("");
@@ -43,7 +11,6 @@ function SearchBar(props) {
 
   return (
     <Form>
-      {/* <Label htmlFor="subreddit">/r/</Label> */}
       <Input
         placeholder="/r/"
         type="text"
@@ -53,9 +20,9 @@ function SearchBar(props) {
         required
       />
 
-      <GOButton type="submit" onClick={handleInputChange}>
+      <GoButton type="submit" onClick={handleInputChange}>
         go
-      </GOButton>
+      </GoButton>
     </Form>
   );
 }
