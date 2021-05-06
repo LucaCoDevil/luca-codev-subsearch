@@ -1,54 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "./components/header/header.js";
 import Content from "./components/content/content.js";
 import SearchBar from "./components/searchBar/searchBar.js";
 import Styled from "styled-components";
+import updateSubreddit from "./store/actions/updateSubreddit";
+import fetchSubredditPosts from "./store/actions/fetchSubredditPosts";
+
+import { connect } from "react-redux";
 
 const BodyContainer = Styled.div`
-  background-color: rgb(231, 231, 231);
   padding-bottom:60px;
   `;
 
-function App() {
-  const [subreddit, setsubreddit] = useState("trending");
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetch("https://www.reddit.com/r/" + subreddit + ".json").then((res) => {
-      switch (res.status) {
-        case 404:
-          alert("ERROR: cannot get");
-          window.location.reload();
-          break;
-
-        case !200 && !404:
-          alert("ERROR: an error has occured ");
-          window.location.reload();
-          break;
-        default:
-          break;
-      }
-
-      res.json().then((data) => {
-        if (data !== null || data !== "undefined") {
-          console.log(data.data.children);
-          setPosts(data.data.children);
-        }
-      });
-    });
-  }, [subreddit]);
-
-  const handleSubreddit = (value) => {
-    setsubreddit(value);
-  };
-
+function App(props) {
   return (
     <BodyContainer>
       <Header />
-      <SearchBar subreddit={subreddit} setsubreddit={handleSubreddit} />
-      <Content data={posts} subredditName={subreddit} />
+      <SearchBar
+        subreddit={props.subreddit}
+        setsubreddit={props.fetchSubredditPosts}
+        fetchData={props.fetchSubredditPosts}
+      />
+      {props.subredditPosts.length === 0
+        ? console.log("NO SUBREDDITS FOUND")
+        : console.log("FOUND SUBREDDITS")}
+      <Content data={props.subredditPosts} subreddit={props.subreddit} />
     </BodyContainer>
   );
 }
 
-export default App;
+const MapStateToProps = (state) => {
+  return {
+    subredditPosts: state.subredditPosts,
+    subreddit: state.subreddit,
+  };
+};
+
+const MapDispatchProps = (dispatch) => {
+  return {
+    fetchSubredditPosts: () => dispatch(fetchSubredditPosts),
+    updateSubreddit: () => dispatch(updateSubreddit),
+  };
+};
+
+export default connect(MapStateToProps, MapDispatchProps)(App);

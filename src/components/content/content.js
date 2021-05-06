@@ -2,6 +2,7 @@ import React from "react";
 // import { ContentContainer, SubredditHeader } from "../styledComponents";
 import Post from "../subredditPost/subredditPost.js";
 import Styled from "styled-components";
+import updateSubreddit from "../../store/actions/updateSubreddit";
 
 const ContentContainer = Styled.div`
     width: 70%;
@@ -23,9 +24,15 @@ const SubredditHeader = Styled.h3`
 `;
 
 function Content(props) {
+  const subredditName = updateSubreddit.payload;
+
   return (
     <ContentContainer>
-      <SubredditHeader>/r/{props.subredditName}</SubredditHeader>
+      {subredditName === undefined ? (
+        <SubredditHeader>Search subredits</SubredditHeader>
+      ) : (
+        <SubredditHeader>{subredditName}</SubredditHeader>
+      )}
       {props.data != null
         ? props.data.map((post, index) => <Post post={post} key={index} />)
         : alert("Null")}

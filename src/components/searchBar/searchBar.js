@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { Form, Input, GoButton } from "../styledComponents";
 import Styled from "styled-components";
+import updateSubreddit from "../../store/actions/updateSubreddit";
 
 const Form = Styled.form`
 display:flex;
@@ -47,12 +48,16 @@ function SearchBar(props) {
   const [subredditSearch, setsubredditSearch] = useState("");
 
   const handleInputChange = (e) => {
-    props.setsubreddit(subredditSearch.replace(/\s+/g, ""));
     e.preventDefault();
+
+    updateSubreddit.payload = subredditSearch.replace(/\s/g, "");
+    props.fetchData();
+
+    setsubredditSearch("");
   };
 
   return (
-    <Form onSubmit={handleInputChange}>
+    <Form>
       <Input
         placeholder="/r/"
         type="text"
@@ -62,7 +67,7 @@ function SearchBar(props) {
         required
       />
 
-      <GoButton type="submit">Go</GoButton>
+      <GoButton onClick={handleInputChange}>Go</GoButton>
     </Form>
   );
 }
