@@ -9,6 +9,7 @@ width:400px;
 height:40px;
 background-color:white;
 border-radius:50px;
+
 @media (max-width: 700px) {
     width:70%;
   }
@@ -20,6 +21,9 @@ padding:0 20px;
 border:0;
 height:100%;
 border-radius: inherit;
+&:focus{
+  outline: none;
+}
 `;
 
 const GoButton = Styled.button`
@@ -27,6 +31,15 @@ width:20%;
 height:100%;
 border-radius:0 50px 50px 0;
 border:none;
+color:#FF4500;
+font-size:1rem;
+font-weight:500;
+background-color:#f7f7f7;
+transition: background-color .2s ease-out;
+&:hover{
+  background-color:#f0f0f0;
+  cursor: pointer;
+}
 
 `;
 
@@ -34,12 +47,12 @@ function SearchBar(props) {
   const [subredditSearch, setsubredditSearch] = useState("");
 
   const handleInputChange = (e) => {
-    console.log("submitted");
-    props.setsubreddit(subredditSearch.replace(/\s/g, ""));
+    props.setsubreddit(subredditSearch.replace(/\s+/g, ""));
+    e.preventDefault();
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleInputChange}>
       <Input
         placeholder="/r/"
         type="text"
@@ -49,9 +62,7 @@ function SearchBar(props) {
         required
       />
 
-      <GoButton type="submit" onClick={handleInputChange}>
-        go
-      </GoButton>
+      <GoButton type="submit">Go</GoButton>
     </Form>
   );
 }

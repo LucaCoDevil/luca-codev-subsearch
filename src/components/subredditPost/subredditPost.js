@@ -7,12 +7,15 @@ const SubredditContainer = Styled.div`
     text-align: center;
 `;
 
-const Heading3 = Styled.h4`
+const SubredditAnchor = Styled.a`
     display:inline-block;
     text-align: center;
+    text-decoration: none;
+    margin:15px;
     font-size:1rem;
     color: rgb(80,80,80);
     font-weight: 400;
+    transition: color .3s ease-out;
     &:hover{
         cursor: pointer;
         color: #FF4500;
@@ -29,7 +32,12 @@ function SubredditPost(props) {
   return (
     <SubredditContainer>
       <Hr />
-      <Heading3>{props.post.data.title}</Heading3>
+      <SubredditAnchor
+        href={"https://www.reddit.com" + props.post.data.permalink}
+        target="_blank"
+      >
+        {props.post.data.title}
+      </SubredditAnchor>
     </SubredditContainer>
   );
 }

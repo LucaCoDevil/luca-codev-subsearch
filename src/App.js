@@ -5,9 +5,9 @@ import SearchBar from "./components/searchBar/searchBar.js";
 import Styled from "styled-components";
 
 const BodyContainer = Styled.div`
-background-color: rgb(236, 236, 236);
-padding-bottom:60px;
-`;
+  background-color: rgb(231, 231, 231);
+  padding-bottom:60px;
+  `;
 
 function App() {
   const [subreddit, setsubreddit] = useState("trending");
@@ -21,12 +21,17 @@ function App() {
           window.location.reload();
           break;
 
+        case !200 && !404:
+          alert("ERROR: an error has occured ");
+          window.location.reload();
+          break;
         default:
           break;
       }
 
       res.json().then((data) => {
-        if (data != null) {
+        if (data !== null || data !== "undefined") {
+          console.log(data.data.children);
           setPosts(data.data.children);
         }
       });
