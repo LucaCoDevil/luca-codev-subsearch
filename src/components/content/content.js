@@ -31,7 +31,7 @@ function Content(props) {
       {subredditName === undefined ? (
         <SubredditHeader>Search subredits</SubredditHeader>
       ) : (
-        <SubredditHeader>{subredditName}</SubredditHeader>
+        <SubredditHeader>/r/{subredditName}</SubredditHeader>
       )}
       {props.data != null
         ? props.data.map((post, index) => <Post post={post} key={index} />)
