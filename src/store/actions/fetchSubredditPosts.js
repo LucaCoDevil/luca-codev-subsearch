@@ -13,14 +13,14 @@ const fetchSubredditPosts = (dispatch) => {
           });
         });
       } else {
-        alert(`ERROR: ${res.status}`);
+        alert(`ERROR: ${res.status}...click OK to reload the page`);
         window.location.reload();
       }
     })
 
     .then((res) => {})
     .catch((err) => {
-      alert(`error: ${err}`);
+      alert(`${err}...click OK to reload the page`);
       window.location.reload();
     });
 };
